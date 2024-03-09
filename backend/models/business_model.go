@@ -5,11 +5,13 @@ import (
 	"gorm.io/gorm"
 )
 
-type User struct {
+type Business struct {
 	gorm.Model
-	ID             uuid.UUID `gorm:"type:uuid"`
+	ID             uuid.UUID `gorm:"type:uuid;primaryKey"`
 	name           string
 	phoneNumber    string
+	email          string
+	address        string
 	requests       []Request
 	activeRequests []ActiveRequest
 }
