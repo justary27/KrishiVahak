@@ -10,6 +10,6 @@ type User struct {
 	ID             uuid.UUID `gorm:"type:uuid"`
 	Name           string
 	PhoneNumber    string
-	Requests       []Request
-	ActiveRequests []ActiveRequest
+	Requests       []Request       `gorm:"foreignKey:ID"`
+	ActiveRequests []ActiveRequest `gorm:"foreignKey:ID"`
 }

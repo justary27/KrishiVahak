@@ -3,6 +3,7 @@ package main
 import (
 	"backend/controllers"
 	"backend/database"
+	"fmt"
 
 	model "backend/models"
 
@@ -21,35 +22,36 @@ func setupRoutes(app *fiber.App) {
 		return controllers.CreateRequest(request)
 	})
 
-    app.Get("/user", func(ctx *fiber.Ctx) error {
-        return controllers.ListUsers(ctx)
-    })
+	app.Get("/user", func(ctx *fiber.Ctx) error {
+		fmt.Println("vkjvk")
+		return controllers.ListUsers(ctx)
+	})
 
-    app.Post("/user", func(ctx *fiber.Ctx) error {
-    // Define a struct to hold the request body
-        type CreateUserRequest struct {
-            Name        string `json:"name"`
-            PhoneNumber string `json:"phoneNumber"`
-        }
-        
-        // Parse the request body into the struct
-        req := new(CreateUserRequest)
-        if err := ctx.BodyParser(req); err != nil {
-            return err
-        }
+	app.Post("/user", func(ctx *fiber.Ctx) error {
+		// Define a struct to hold the request body
+		type CreateUserRequest struct {
+			Name        string `json:"name"`
+			PhoneNumber string `json:"phoneNumber"`
+		}
 
-        // Create a new User instance with the parsed data
-        user := &model.User{
-            Name:        req.Name,
-            PhoneNumber: req.PhoneNumber,
-        }
+		// Parse the request body into the struct
+		req := new(CreateUserRequest)
+		if err := ctx.BodyParser(req); err != nil {
+			return err
+		}
 
-        // Save the new user to the database
-        if err := database.DB.Create(&user).Error; err != nil {
-            return err
-        }
-        return ctx.JSON(user)
-    })
+		// Create a new User instance with the parsed data
+		user := &model.User{
+			Name:        req.Name,
+			PhoneNumber: req.PhoneNumber,
+		}
+
+		// Save the new user to the database
+		if err := database.DB.Create(&user).Error; err != nil {
+			return err
+		}
+		return ctx.JSON(user)
+	})
 
 	// app.Get("/fact", controllers.NewFactView)
 	// app.Post("/request", controllers.CreateRequest)
@@ -62,20 +64,24 @@ func setupRoutes(app *fiber.App) {
 	// app.Delete("/fact/:id", controllers.DeleteFact)
 }
 
-
 func main() {
-    // Start a new fiber app
-    app := fiber.New()
+	// Start a new fiber app
+	app := fiber.New()
 
-    // Connect to the Database
-    database.ConnectDB()
-    setupRoutes(app)
-    // Send a string back for GET calls to the endpoint "/"
-    app.Get("/", func(c *fiber.Ctx) error {
-        err := c.SendString("And the API is UP!")
-        return err
-    })
+	// Connect to the Database
+	database.ConnectDB()
+	setupRoutes(app)
+	// Send a string back for GET calls to the endpoint "/"
+	app.Get("/", func(c *fiber.Ctx) error {
+		err := c.SendString("And the API is UP!")
+		return err
+	})
 
-    // Listen on PORT 3000
-    app.Listen(":3000")
+	err := database.DB.AutoMigrate(&model.User{}, &model.Request{}, &model.ActiveRequest{})
+	if err != nil {
+		panic("Error during migration: " + err.Error())
+	}
+
+	// Listen on PORT 3000
+	app.Listen(":3000")
 }

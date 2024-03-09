@@ -10,90 +10,77 @@ import (
 
 func ListUsers(ctx *fiber.Ctx) error {
 	users := []models.User{}
-    database.DB.Find(&users)
+	database.DB.Find(&users)
 
-    return ctx.Render("index", fiber.Map{
-        "Users": users,
-    })
+	return ctx.JSON(users)
 }
-
 
 // CreateUser creates a new user
 func CreateUser(ctx *fiber.Ctx) error {
-    // Define a struct to hold the request body
-    type CreateUserRequest struct {
-     	Name        string `json:"name"`
-        PhoneNumber string `json:"phoneNumber"`
-    }
+	// Define a struct to hold the request body
+	type CreateUserRequest struct {
+		Name        string `json:"name"`
+		PhoneNumber string `json:"phoneNumber"`
+	}
 
-    // Parse the request body into the struct
-    req := new(CreateUserRequest)
+	// Parse the request body into the struct
+	req := new(CreateUserRequest)
 	if err := ctx.BodyParser(req); err != nil {
 		return err
 	}
 
-// Create a new User instance with the parsed data
+	// Create a new User instance with the parsed data
 	user := &models.User{
 		Name:        req.Name,
 		PhoneNumber: req.PhoneNumber,
 		// Set other fields here
 	}
 
-	 if err := database.DB.Create(&user).Error; err != nil {
-        return err
-    }
+	if err := database.DB.Create(&user).Error; err != nil {
+		return err
+	}
 
-    // Return the created user as JSON response
-    return ctx.JSON(user)
+	// Return the created user as JSON response
+	return ctx.JSON(user)
 }
 
-
-// func CreateUser(ctx *fiber.Ctx) error {
-//     user := new(models.User)
-//     if err := ctx.BodyParser(user); err != nil {
-//         return err
-//     }
-//     database.DB.Create(&user)
-//     return ctx.JSON(user)
-// }
-
 func GetUser(ctx *fiber.Ctx) error {
-    id := ctx.Params("id")
-    var user models.User
-    if err := database.DB.First(&user, id).Error; err != nil {
-        if err == gorm.ErrRecordNotFound {
-            return ctx.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "User not found"})
-        }
-        return err
-    }
-    return ctx.JSON(user)
+	id := ctx.Params("id")
+	var user models.User
+	if err := database.DB.First(&user, id).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return ctx.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "User not found"})
+		}
+		return err
+	}
+	return ctx.JSON(user)
 }
 
 func UpdateUser(ctx *fiber.Ctx) error {
-    id := ctx.Params("id")
-    var user models.User
-    if err := database.DB.First(&user, id).Error; err != nil {
-        if err == gorm.ErrRecordNotFound {
-            return ctx.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "User not found"})
-        }
-        return err
-    }
-    if err := ctx.BodyParser(&user); err != nil {
-        return err
-    }
-    database.DB.Save(&user)
-    return ctx.JSON(user)
+	id := ctx.Params("id")
+	var user models.User
+	if err := database.DB.First(&user, id).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return ctx.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "User not found"})
+		}
+		return err
+	}
+	if err := ctx.BodyParser(&user); err != nil {
+		return err
+	}
+	database.DB.Save(&user)
+	return ctx.JSON(user)
 }
 
 func DeleteUser(ctx *fiber.Ctx) error {
-    id := ctx.Params("id")
-    var user models.User
-    if err := database.DB.First(&user, id).Error; err != nil {
-        if err == gorm.ErrRecordNotFound {
-            return ctx.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "User not found"})
-        }
-        return err
-    }
-    database.DB.Delete(&user)
-    return ctx.SendString("User deleted successfully")
+	id := ctx.Params("id")
+	var user models.User
+	if err := database.DB.First(&user, id).Error; err != nil {
+		if err == gorm.ErrRecordNotFound {
+			return ctx.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "User not found"})
+		}
+		return err
+	}
+	database.DB.Delete(&user)
+	return ctx.SendString("User deleted successfully")
 }
