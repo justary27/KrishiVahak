@@ -4,6 +4,8 @@ import (
 	"backend/database"
 	models "backend/models"
 
+	"github.com/google/uuid"
+
 	"github.com/gofiber/fiber/v2"
 	"gorm.io/gorm"
 )
@@ -15,7 +17,6 @@ func ListUsers(ctx *fiber.Ctx) error {
 	return ctx.JSON(users)
 }
 
-// CreateUser creates a new user
 func CreateUser(ctx *fiber.Ctx) error {
 	// Define a struct to hold the request body
 	type CreateUserRequest struct {
@@ -25,12 +26,17 @@ func CreateUser(ctx *fiber.Ctx) error {
 
 	// Parse the request body into the struct
 	req := new(CreateUserRequest)
+
 	if err := ctx.BodyParser(req); err != nil {
 		return err
 	}
 
+	// Generate a new UUID for the user
+	id := uuid.New()
+
 	// Create a new User instance with the parsed data
 	user := &models.User{
+		ID:          id,
 		Name:        req.Name,
 		PhoneNumber: req.PhoneNumber,
 		// Set other fields here

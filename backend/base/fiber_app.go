@@ -26,6 +26,8 @@ func (fiberApp *FiberApp) registerUserApis() {
 
 	apis.GetUsers(userRouter)
 	apis.CreateUser(userRouter)
+	apis.UpdateUser(userRouter)
+	apis.DeleteUser(userRouter)
 }
 
 func (fiberApp *FiberApp) registerRequestApis() {
