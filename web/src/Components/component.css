@@ -1,0 +1,85 @@
+.nav_bar{
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    align-items: flex-start;
+    height:952px;
+    width:72px;
+    margin-top: 84px;
+    margin-left:100px;
+    margin-right:100px;
+
+}
+.icons{
+    width: 32px;
+    height: 32px;
+}
+.Top_bar{
+    width:1000px;
+    height:72px;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+.Row{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Logo{
+display: flex;
+flex-direction: column;
+justify-content: center;
+margin-top: 20px;
+
+}
+.right{
+    display: flex;
+    justify-content: space-between;
+
+}
+.details{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 90%;
+    height: 90%;
+}
+.card_bottom{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+    height:50%;
+
+}
+.rate{
+    display: flex;
+    width:10%;
+    height:5%;
+    justify-content: space-between;
+    align-items:flex-start;
+}
+.rate img{
+    align-self: flex-end;
+}
+.cards{
+    display: flex;
+    justify-content:space-between;
+    width:795px;
+    height:83px;
+}
+.card{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+    box-shadow:inset;
+}
+.Grid_row{
+    display: flex;
+    justify-content: space-around;
+}
