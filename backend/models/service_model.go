@@ -19,3 +19,9 @@ type Service struct {
 	quote       int
 	vehicles    []Vehicle
 }
+
+func (service *Service) BeforeCreate(tx *gorm.DB) (err error) {
+	service.ID = uuid.New()
+
+	return nil
+}

@@ -15,3 +15,9 @@ type Business struct {
 	Requests       []Request
 	ActiveRequests []ActiveRequest
 }
+
+func (business *Business) BeforeCreate(tx *gorm.DB) (err error) {
+	business.ID = uuid.New()
+
+	return nil
+}

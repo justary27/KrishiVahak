@@ -27,6 +27,12 @@ type Request struct {
 	status      string
 }
 
+func (request *Request) BeforeCreate(tx *gorm.DB) (err error) {
+	request.ID = uuid.New()
+
+	return nil
+}
+
 type ActiveRequest struct {
 	Request
 
