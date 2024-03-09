@@ -8,8 +8,8 @@ import (
 type User struct {
 	gorm.Model
 	ID             uuid.UUID `gorm:"type:uuid"`
-	name           string
-	phoneNumber    string
-	requests       []Request
-	activeRequests []ActiveRequest
+	Name           string
+	PhoneNumber    string
+	Requests       []Request
+	ActiveRequests []ActiveRequest
 }
