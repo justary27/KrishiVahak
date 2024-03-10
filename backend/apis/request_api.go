@@ -7,19 +7,19 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func GetRequests(group fiber.Router) {
-	group.Get("/", func(ctx *fiber.Ctx) error {
+func GetRequests(requestGroup fiber.Router) {
+	requestGroup.Get("/", func(ctx *fiber.Ctx) error {
 		return controllers.ListRequests(ctx)
 	})
 }
 
-func CreateRequest(group fiber.Router) {
-	group.Post("/", func(ctx *fiber.Ctx) error {
+func CreateRequest(requestGroup fiber.Router) {
+	requestGroup.Post("/", func(ctx *fiber.Ctx) error {
 		request := &model.Request{}
 		return controllers.CreateRequest(request)
 	})
 }
 
-func GetRequest(group fiber.Router)    {}
-func UpdateRequest(group fiber.Router) {}
-func DeleteRequest(group fiber.Router) {}
+func GetRequest(requestGroup fiber.Router)    {}
+func UpdateRequest(requestGroup fiber.Router) {}
+func DeleteRequest(requestGroup fiber.Router) {}

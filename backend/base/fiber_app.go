@@ -4,6 +4,7 @@ import (
 	"backend/apis"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 type FiberApp struct {
@@ -15,6 +16,13 @@ func NewFiberApp() *FiberApp {
 		App: fiber.New(),
 	}
 
+	app.App.Use(
+		cors.New(
+			cors.Config{
+				AllowHeaders: "Origin,Content-Type,Accept,Content-Length,Accept-Language,Accept-Encoding,Connection,Access-Control-Allow-Origin",
+			},
+		))
+
 	app.registerUserApis()
 	app.registerRequestApis()
 
@@ -24,8 +32,9 @@ func NewFiberApp() *FiberApp {
 func (fiberApp *FiberApp) registerUserApis() {
 	userRouter := fiberApp.App.Group("/user")
 
-	apis.GetUsers(userRouter)
 	apis.CreateUser(userRouter)
+	apis.GetUsers(userRouter)
+	apis.GetUser(userRouter)
 	apis.UpdateUser(userRouter)
 	apis.DeleteUser(userRouter)
 }

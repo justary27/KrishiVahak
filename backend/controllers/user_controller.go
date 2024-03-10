@@ -3,10 +3,10 @@ package controllers
 import (
 	"backend/database"
 	models "backend/models"
-
-	"github.com/google/uuid"
+	"fmt"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/google/uuid"
 	"gorm.io/gorm"
 )
 
@@ -31,15 +31,15 @@ func CreateUser(ctx *fiber.Ctx) error {
 		return err
 	}
 
-	// Generate a new UUID for the user
-	id := uuid.New()
+	result := database.DB.Unscoped().Delete(&models.User{}, "deleted_at IS NOT NULL")
+	if result.Error != nil {
+		return result.Error
+	}
 
 	// Create a new User instance with the parsed data
 	user := &models.User{
-		ID:          id,
 		Name:        req.Name,
 		PhoneNumber: req.PhoneNumber,
-		// Set other fields here
 	}
 
 	if err := database.DB.Create(&user).Error; err != nil {
@@ -51,42 +51,75 @@ func CreateUser(ctx *fiber.Ctx) error {
 }
 
 func GetUser(ctx *fiber.Ctx) error {
-	id := ctx.Params("id")
+
+	id := ctx.Params("userId")
+	uuidFromString, err := uuid.Parse(id)
+	if err != nil {
+		fmt.Println("Error parsing UUID:", err)
+		return ctx.SendString("")
+	}
+
 	var user models.User
-	if err := database.DB.First(&user, id).Error; err != nil {
+
+	if err := database.DB.First(&user, uuidFromString).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return ctx.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "User not found"})
 		}
 		return err
 	}
+
 	return ctx.JSON(user)
 }
 
 func UpdateUser(ctx *fiber.Ctx) error {
-	id := ctx.Params("id")
+	type PatchUserRequest struct {
+		Name        string `json:"name"`
+		PhoneNumber string `json:"phoneNumber"`
+	}
+
+	id := ctx.Params("userId")
+	uuidFromString, err := uuid.Parse(id)
+	if err != nil {
+		fmt.Println("Error parsing UUID:", err)
+		return ctx.SendString("")
+	}
 	var user models.User
-	if err := database.DB.First(&user, id).Error; err != nil {
+
+	if err := database.DB.First(&user, uuidFromString).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return ctx.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "User not found"})
 		}
 		return err
 	}
-	if err := ctx.BodyParser(&user); err != nil {
+
+	req := new(PatchUserRequest)
+	if err := ctx.BodyParser(req); err != nil {
 		return err
 	}
+
+	user.Name = req.Name
+	user.PhoneNumber = req.PhoneNumber
+
 	database.DB.Save(&user)
-	return ctx.JSON(user)
+	return ctx.SendString("User deleted successfully")
 }
 
 func DeleteUser(ctx *fiber.Ctx) error {
-	id := ctx.Params("id")
+	id := ctx.Params("userId")
+	uuidFromString, err := uuid.Parse(id)
+	if err != nil {
+		fmt.Println("Error parsing UUID:", err)
+		return ctx.SendString("")
+	}
 	var user models.User
-	if err := database.DB.First(&user, id).Error; err != nil {
+
+	if err := database.DB.First(&user, uuidFromString).Error; err != nil {
 		if err == gorm.ErrRecordNotFound {
 			return ctx.Status(fiber.StatusNotFound).JSON(fiber.Map{"error": "User not found"})
 		}
 		return err
 	}
+
 	database.DB.Delete(&user)
 	return ctx.SendString("User deleted successfully")
 }

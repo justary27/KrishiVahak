@@ -13,3 +13,9 @@ type User struct {
 	Requests       []Request       `gorm:"foreignKey:ID"`
 	ActiveRequests []ActiveRequest `gorm:"foreignKey:ID"`
 }
+
+func (user *User) BeforeCreate(tx *gorm.DB) (err error) {
+	user.ID = uuid.New()
+
+	return nil
+}
