@@ -39,3 +39,38 @@ border-color: black;
   margin-left: 20px;
   margin-right: 20px;
 }
+Form{
+  width: 990px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  
+}
+.Form_h{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 30px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.Services{
+  margin-top:1200px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.Service_Top{
+  display: flex;
+  justify-content: space-between;
+}
+.Service_Top button{
+  width:120px;
+  height: 50px;
+  margin-left: 800px;
+}

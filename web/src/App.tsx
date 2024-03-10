@@ -8,7 +8,15 @@ import Grid from "./Components/Grid";
 import His_cards from './Components/His_cards';
 import Placeholder1 from "./Components/assets/Placeholder1.png";
 import Placeholder2 from "./Components/assets/Placeholder2.png";
-function App() {
+import Form from './Pages/Form';
+import IVehicleFormData from "./Pages/Form";
+import Services from "./Pages/Services"
+
+function App(){
+   const handleSubmit = (formData: any) => {
+    console.log(formData);
+   }
+
   return (
     <div className='Page'>
       <header>
@@ -27,8 +35,18 @@ function App() {
           <div className='Placeholder2'><img src={Placeholder2}/></div>
           <h1 className='Active'>Money History</h1>
           <His_cards/>
+          
         </div>
-
+       <div className='Form_h'> 
+        <h1>Create a Service</h1> 
+       <Form onSubmit={handleSubmit} /></div>
+       <div className="Services">
+        <div className='Service_Top'>
+        <h1>Services</h1>
+        <button>Create+</button>
+        </div>
+       <Services/>
+       </div>
       </div>
    </body>
     </div>
