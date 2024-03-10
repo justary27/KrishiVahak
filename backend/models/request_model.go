@@ -18,13 +18,13 @@ const (
 type Request struct {
 	gorm.Model
 	ID          uuid.UUID `gorm:"type:uuid;primaryKey"`
-	quote       int
-	requester   User
-	requestTime time.Time
-	description string
-	src         string
-	dest        string
-	status      string
+	Quote       int
+	Requester   uuid.UUID
+	RequestTime time.Time
+	Description string
+	Src         string
+	Dest        string
+	Status      string
 }
 
 func (request *Request) BeforeCreate(tx *gorm.DB) (err error) {

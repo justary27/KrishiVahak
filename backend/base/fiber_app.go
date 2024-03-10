@@ -25,6 +25,8 @@ func NewFiberApp() *FiberApp {
 
 	app.registerUserApis()
 	app.registerRequestApis()
+	app.registerServiceApis()
+	app.registerVehicleApis()
 
 	return app
 }
@@ -43,4 +45,28 @@ func (fiberApp *FiberApp) registerRequestApis() {
 	requestRouter := fiberApp.App.Group("/requests")
 
 	apis.CreateRequest(requestRouter)
+	apis.GetRequests(requestRouter)
+	apis.GetRequest(requestRouter)
+	apis.UpdateRequest(requestRouter)
+	apis.DeleteRequest(requestRouter)
+}
+
+func (fiberApp *FiberApp) registerServiceApis() {
+	servicesRouter := fiberApp.App.Group("/services")
+
+	apis.CreateService(servicesRouter)
+	apis.GetServices(servicesRouter)
+	apis.GetService(servicesRouter)
+	apis.UpdateService(servicesRouter)
+	apis.DeleteService(servicesRouter)
+}
+
+func (fiberApp *FiberApp) registerVehicleApis() {
+	vehicleRouter := fiberApp.App.Group("/vehicles")
+
+	apis.CreateVehicle(vehicleRouter)
+	apis.GetVehicles(vehicleRouter)
+	apis.GetVehicle(vehicleRouter)
+	apis.UpdateVehicle(vehicleRouter)
+	apis.DeleteVehicle(vehicleRouter)
 }

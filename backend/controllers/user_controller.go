@@ -72,7 +72,7 @@ func GetUser(ctx *fiber.Ctx) error {
 }
 
 func UpdateUser(ctx *fiber.Ctx) error {
-	type PatchUserRequest struct {
+	type PutUserRequest struct {
 		Name        string `json:"name"`
 		PhoneNumber string `json:"phoneNumber"`
 	}
@@ -92,7 +92,7 @@ func UpdateUser(ctx *fiber.Ctx) error {
 		return err
 	}
 
-	req := new(PatchUserRequest)
+	req := new(PutUserRequest)
 	if err := ctx.BodyParser(req); err != nil {
 		return err
 	}

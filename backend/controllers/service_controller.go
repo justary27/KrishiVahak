@@ -11,14 +11,14 @@ import (
 	"gorm.io/gorm"
 )
 
-func ListRequests(ctx *fiber.Ctx) error {
+func ListServices(ctx *fiber.Ctx) error {
 	requests := []models.Request{}
 	database.DB.Find(&requests)
 
 	return ctx.JSON(requests)
 }
 
-func CreateRequest(ctx *fiber.Ctx) error {
+func CreateService(ctx *fiber.Ctx) error {
 	type CreateRequestRequest struct {
 		Quote       int       `json:"quote"`
 		Requester   string    `json:"requester"`
@@ -63,7 +63,7 @@ func CreateRequest(ctx *fiber.Ctx) error {
 	return ctx.JSON(request)
 }
 
-func GetRequest(ctx *fiber.Ctx) error {
+func GetService(ctx *fiber.Ctx) error {
 	id := ctx.Params("requestId")
 	uuidFromString, err := uuid.Parse(id)
 	if err != nil {
@@ -83,7 +83,7 @@ func GetRequest(ctx *fiber.Ctx) error {
 	return ctx.JSON(request)
 }
 
-func UpdateRequest(ctx *fiber.Ctx) error {
+func UpdateService(ctx *fiber.Ctx) error {
 	type PutRequestRequest struct {
 		Quote       int       `json:"quote"`
 		Requester   string    `json:"requester"`
@@ -127,8 +127,8 @@ func UpdateRequest(ctx *fiber.Ctx) error {
 	return ctx.SendString("Request deleted successfully!")
 }
 
-func DeleteRequest(ctx *fiber.Ctx) error {
-	id := ctx.Params("userId")
+func DeleteService(ctx *fiber.Ctx) error {
+	id := ctx.Params("serviceId")
 	uuidFromString, err := uuid.Parse(id)
 	if err != nil {
 		fmt.Println("Error parsing UUID:", err)
