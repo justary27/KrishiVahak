@@ -6,8 +6,8 @@
     height:952px;
     width:72px;
     margin-top: 84px;
-    margin-left:100px;
-    margin-right:100px;
+    margin-left:10px;
+    margin-right:500px;
 
 }
 .icons{
@@ -17,11 +17,14 @@
 .Top_bar{
     width:1000px;
     height:72px;
-    padding-left: 100px;
+    padding-left: 10px;
     padding-right: 100px;
     padding-top: 20px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    z-index: 100;
 }
 .Row{
     display: flex;
@@ -44,9 +47,10 @@ margin-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content:center;
     width: 90%;
     height: 90%;
+    margin-left: 20px;
 }
 .card_bottom{
     display: flex;
@@ -54,32 +58,56 @@ margin-top: 20px;
     justify-content: space-between;
     width: 80%;
     height:50%;
+  
 
 }
 .rate{
     display: flex;
-    width:10%;
-    height:5%;
+    flex-direction: row;
     justify-content: space-between;
-    align-items:flex-start;
+    align-items:center;
+    margin-left: 10px;
 }
 .rate img{
-    align-self: flex-end;
+    align-self: flex-start;
+    margin-left:10px;
 }
 .cards{
     display: flex;
     justify-content:space-between;
     width:795px;
     height:83px;
+    margin-top: 20px;
 }
 .card{
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    z-index: 2;
-    box-shadow:inset;
+}
+.card img{
+    align-self: flex-end;
 }
 .Grid_row{
     display: flex;
     justify-content: space-around;
+}
+.his_div{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: flex-start;
+}
+.history{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width:301px;
+    height:55px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.his_image{
+    margin-right: 10px;
 }

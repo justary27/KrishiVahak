@@ -12,7 +12,7 @@ function Card() {
      <div className="card_bottom"> <h1>7200</h1>
      <div className="rate">
         <p>+11.02%</p>
-        <img src={up}/>
+       <div> <img src={up}/></div>
      </div>
      </div>
        </div>
