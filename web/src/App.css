@@ -74,3 +74,21 @@ Form{
   height: 50px;
   margin-left: 800px;
 }
+.LCardL{
+  margin-left: 50px;
+  width:390px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.L_card{
+  display: flex;
+  flex-direction: row;
+  justify-content:flex-start;
+  align-items: center;
+}
+.LCardR img{
+  width: 900px;
+  height: 955px;
+  
+}

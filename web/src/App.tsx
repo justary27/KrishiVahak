@@ -10,8 +10,9 @@ import Placeholder1 from "./Components/assets/Placeholder1.png";
 import Placeholder2 from "./Components/assets/Placeholder2.png";
 import Form from './Pages/Form';
 import IVehicleFormData from "./Pages/Form";
-import Services from "./Pages/Services"
-
+import Services from "./Pages/Services";
+import L_card from "./Components/L_card";
+import Map from "./Components/assets/Map.png";
 function App(){
    const handleSubmit = (formData: any) => {
     console.log(formData);
@@ -48,6 +49,16 @@ function App(){
        <Services/>
        </div>
       </div>
+      <div className='L_card'>
+        <div className='LCardL'>
+        <h1>Ongoing Delivery</h1>
+        <L_card/>
+        <L_card/>
+        </div>
+        <div className='LCardR'>
+          <img src={Map}/>
+        </div>
+        </div>
    </body>
     </div>
     );
