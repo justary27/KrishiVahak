@@ -10,6 +10,16 @@
     margin-right:500px;
 
 }
+.Link, .Link:focus,
+.Link:hover,
+.Link:visited,
+.Link:link,
+.Link:active {
+  text-decoration: none;
+  text-decoration-color: none;
+  text-decoration-line: none;
+}
+
 .icons{
     width: 32px;
     height: 32px;

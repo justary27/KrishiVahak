@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { setVehicleRequests } from '../Actions/set_request';
+// import { setVehicleRequests } from '../Actions/set_request';
 import { fetchRequest } from '../api/fetchRequests';
 
 const YourComponent: React.FC = () => {
@@ -9,7 +9,7 @@ const YourComponent: React.FC = () => {
     const fetchVehicleRequests = async () => {
         // Fetch vehicle requests from the database
         const count = await fetchRequest();
-        dispatch(setVehicleRequests(count));
+        // dispatch(setVehicleRequests(count));
     };
 
     return (

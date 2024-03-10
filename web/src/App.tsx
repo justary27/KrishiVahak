@@ -1,28 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import SideNavBar from "./Components/SideNavBar";
-import Top_bar from './Components/top_bar';
-import S_cards from './Components/S_cards';
-import Grid from "./Components/Grid";
-import His_cards from './Components/His_cards';
-import Placeholder1 from "./Components/assets/Placeholder1.png";
-import Placeholder2 from "./Components/assets/Placeholder2.png";
 import Form from './Pages/Form';
+<<<<<<< Updated upstream
 import IVehicleFormData from "./Pages/Form";
 import Services from "./Pages/Services";
 import L_card from "./Components/L_card";
 import Map from "./Components/assets/Map.png";
+=======
+import Services from "./Pages/Services"
+import Top_bar from './Components/top_bar';
+import HomePage from './Pages/HomePage';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+// import SideNavBar from './Components/SideNavBar';
+
+>>>>>>> Stashed changes
 function App(){
-   const handleSubmit = (formData: any) => {
+  const handleSubmit = (formData: any) => {
     console.log(formData);
    }
-
-  return (
-    <div className='Page'>
+     return (
+      <>
+      <div className='Page'>
       <header>
-    <Top_bar/></header>
+      <Top_bar/>
+      </header>
+        {/* <SideNavBar /> */}
     <body>
+<<<<<<< Updated upstream
       <div className="main_body"> 
         <SideNavBar />
         <div className='main_bodyC'>
@@ -59,11 +63,20 @@ function App(){
           <img src={Map}/>
         </div>
         </div>
+=======
+      <Router>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/form" element={<Form onSubmit={handleSubmit}/>} />
+          <Route path="/services" element={<Services/>} />
+        </Routes>
+      </Router>
+>>>>>>> Stashed changes
    </body>
     </div>
-    );
- 
+      </>
+  );
 }
 
-export default App;
 
+export default App;
